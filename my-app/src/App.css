@@ -7,4 +7,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.column {
+  width: 300px;
+}
 

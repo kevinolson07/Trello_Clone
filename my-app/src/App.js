@@ -1,16 +1,25 @@
+import List from "./components/List/List";
+import React from 'react';
+import "./App.css";
 
-import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        {/* <img src={logo} className="App-logo" alt="logo" /> */}
-        <p>
-          Hello World!
-        </p>
+        <h1 >
+          Trello Dupe
+        </h1>
         
       </header>
+      <body>
+        <div> 
+          <List />
+        </div>
+      </body>
     </div>
   );
 }
