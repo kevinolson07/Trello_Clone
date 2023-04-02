@@ -1,19 +1,40 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+
+
+
 require("dotenv").config({ path: "./config.env" });
+
+
+const atlasUri = process.env.ATLAS_URI;
+
 const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
-app.use(require("./routes/record"));
-// get driver connection
-const dbo = require("./db/conn");
- 
-app.listen(port, () => {
-  // perform a database connection when server starts
-  dbo.connectToServer(function (err) {
-    if (err) console.error(err);
- 
-  });
-  console.log(`Server is running on port: ${port}`);
-});
+
+
+
+
+const mongoose = require('mongoose');
+const Db = process.env.ATLAS_URI;
+mongoose.connect(Db)
+  .then(() => {
+    //listen for requests
+    app.listen(port, () => {
+      console.log(`Connected to database and server is running on port: ${port}`);
+    });
+  })
+  .catch((error) => {
+    console.log(error)
+  })
+
+
+
+const cardsRouter = require('./routes/routeCards');
+
+
+
+app.use('/cards', cardsRouter);
+
+
